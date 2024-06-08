@@ -1,5 +1,7 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
+#pandas
 df = pd.read_csv('casas_para_alugar.csv')
 
 #exibir a tabela que importamos
@@ -40,3 +42,39 @@ df["valores anuais (R$)"] = (df['valores mensais (R$)'] * 12) + df["imposto do i
 
 df.to_csv("Valores analisados - casas para alugar.csv", sep=";")
 print(df)
+
+# Agrupar por cidade e calcular a média dos valores mensais
+media_valores_mensais = df.groupby('cidade')['valores mensais (R$)'].mean()
+
+# matplotlib
+x = media_valores_mensais.index
+y = media_valores_mensais.values
+
+plt.bar(x, y)
+plt.xlabel("Cidades")
+plt.ylabel("Média dos valores mensais (R$)")
+plt.title('Valor mensal em média por cidade')
+
+# Adicionar os valores exatos acima das barras
+for i, v in enumerate(y):
+    plt.text(i, v + 30, f'{v:.2f}', ha='center', va='center', fontsize=8)
+
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig("valor mensal em média por cidade.png")
+plt.show()
+
+#grafico de pizza
+#criando uma figura com 1 linha e 2 colunas, selecionando o segundo subplot para desenhar o grafico
+plt.subplot(1, 2, 2)
+cidade_counts = df['cidade'].value_counts()
+#criando o grafico de pizza -> valores para oo grafico -> define os rotulos das fatias -> formata pra mostrar a porcentagem com uma casa decimal -> define o angulo da primeira fatia da pizza
+plt.pie(cidade_counts, labels=cidade_counts.index, autopct='%1.1f%%', startangle=140)
+# centralizar o gráfico de pizza 
+plt.gca().set_position([0.5, 0.5, 0.5, 0.5])
+plt.title('Distribuição das cidades')
+plt.tight_layout()
+plt.savefig("cidades.png")
+plt.show()
+
+#tkinter
