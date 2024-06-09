@@ -10,11 +10,11 @@ class App:
         self.janela = janela
         janela.title('Análise de casa para alugar')
 
-        self.texto_orientacao = Label(janela, text='Análise de dados de locais para alugar por meio de daos e gráficos')
+        self.texto_orientacao = Label(janela, text='Análise de dados de locais para alugar por meio de dados e gráficos')
         self.texto_orientacao.grid(column=0, row=0, padx=10, pady=10)
 
-        #self.carregar_botao = Button(janela, text='Carregar CSV', command=self.carrega_csv)
-        #self.carregar_botao.grid(column=0, row=1, padx=10, pady=10)
+        self.carregar_botao = Button(janela, text='Carregar CSV', command=self.carrega_csv)
+        self.carregar_botao.grid(column=0, row=1, padx=10, pady=10)
 
         self.mostra_botao = Button(janela, text='Mostra tabela', command=self.mostra_tabela)
         self.mostra_botao.grid(column=0, row=2, padx=10, pady=10)
@@ -25,13 +25,10 @@ class App:
         self.df = None
     
     def carrega_csv(self):
-        self.df = pd.read_csv('casas_para_alugar.csv')
-        #path_arquivo = filedialog.askopenfilename()
+        path_arquivo = filedialog.askopenfilename()
 
-        #if path_arquivo: 
-                #deixa o caminho direto ou path_arquivo
-            #self.df = pd.read_csv('casas_para_alugar.csv')
-            #self.df = pd.read_csv(path_arquivo)
+        if path_arquivo: 
+            self.df = pd.read_csv(path_arquivo)
             self.df = self.df.rename(columns={'city': 'cidade', 
                             'rooms': 'quartos', 
                             'bathroom': 'banheiro', 
@@ -56,7 +53,7 @@ class App:
             if 'not furnished' in self.df['mobilhado'].values:
                 self.df.loc[self.df['mobilhado']=="not furnished", 'mobilhado'] = 'sem mobilha'
 
-            #criando uma hipotese que os gastos mensais são apenas o valor do condominio e o valor do lauguel e que os imposto do imovel e seguro fiança é apenas anual. irei calcular os valores mensais, primeiramente
+            #criando uma hipotese que os gastos mensais são apenas o valor do condominio e o valor do aluguel e que os imposto do imovel e seguro fiança é apenas anual. irei calcular os valores mensais, primeiramente
             #calcula o valor mensal
             self.df["valores mensais (R$)"] = self.df["valor condomínio (R$)"] + self.df["valor do aluguel (R$)"]
 

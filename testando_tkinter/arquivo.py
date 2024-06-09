@@ -35,7 +35,6 @@ def pandas():
 
 
     #criando uma hipotese que os gastos mensais são apenas o valor do condominio e o valor do lauguel e que os imposto do imovel e seguro fiança é apenas anual. irei calcular os valores mensais, primeiramente
-
     #calcula o valor mensal
     df["valores mensais (R$)"] = df["valor condomínio (R$)"] + df["valor do aluguel (R$)"]
 

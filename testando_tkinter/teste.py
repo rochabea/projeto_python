@@ -43,3 +43,5 @@ texto_cotacao.grid(column=0, row=2, padx= 10, pady=10)
 
 #exibe a janela -> ultima linha de codigo
 janela.mainloop()
+
+#pra pessoa nao ter que rodar o codigo, tem que colocar em arquivo executavel
