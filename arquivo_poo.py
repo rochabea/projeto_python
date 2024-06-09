@@ -13,8 +13,8 @@ class App:
         self.texto_orientacao = Label(janela, text='Análise de dados de locais para alugar por meio de daos e gráficos')
         self.texto_orientacao.grid(column=0, row=0, padx=10, pady=10)
 
-        self.carregar_botao = Button(janela, text='Carregar CSV', command=self.carrega_csv)
-        self.carregar_botao.grid(column=0, row=1, padx=10, pady=10)
+        #self.carregar_botao = Button(janela, text='Carregar CSV', command=self.carrega_csv)
+        #self.carregar_botao.grid(column=0, row=1, padx=10, pady=10)
 
         self.mostra_botao = Button(janela, text='Mostra tabela', command=self.mostra_tabela)
         self.mostra_botao.grid(column=0, row=2, padx=10, pady=10)
@@ -25,12 +25,13 @@ class App:
         self.df = None
     
     def carrega_csv(self):
-        path_arquivo = filedialog.askopenfilename()
+        self.df = pd.read_csv('casas_para_alugar.csv')
+        #path_arquivo = filedialog.askopenfilename()
 
-        if path_arquivo: 
+        #if path_arquivo: 
                 #deixa o caminho direto ou path_arquivo
             #self.df = pd.read_csv('casas_para_alugar.csv')
-            self.df = pd.read_csv(path_arquivo)
+            #self.df = pd.read_csv(path_arquivo)
             self.df = self.df.rename(columns={'city': 'cidade', 
                             'rooms': 'quartos', 
                             'bathroom': 'banheiro', 
